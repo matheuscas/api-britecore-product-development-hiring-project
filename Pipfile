@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 cryptography = "*"
 django = "*"
+djangorestframework = "*"
 
 [dev-packages]
 
