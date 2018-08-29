@@ -1,8 +1,12 @@
 from django.shortcuts import render
+from rest_framework import generics
+
+from .models import RiskType
+from .serializers import RiskTypeSerializer
 
 # Create your views here.
 
-from django.http import HttpResponse
 
-def index(request):
-    return HttpResponse("First view in awhile")
+class RiskTypeView(generics.ListAPIView):
+    queryset = RiskType.objects.all()
+    serializer_class = RiskTypeSerializer
