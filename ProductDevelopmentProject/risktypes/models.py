@@ -15,10 +15,10 @@ class TextField(Field):
     value = models.CharField(max_length=200, blank=True)
 
 class NumberField(Field):
-    value = models.FloatField(blank=True)
+    value = models.FloatField(blank=True, null=True)
 
 class DateField(Field):
-    value = models.DateField(blank=True)
+    value = models.DateField(blank=True, null=True)
 
 class EnumField(Field):
     pass
