@@ -58,10 +58,21 @@ class GetAllRiskTypes(BaseViewTests):
         """
 
         response = self.client.get(
-            reverse("get-riskTypes", kwargs={"version": "v1"})
+            reverse("get-all-riskTypes", kwargs={"version": "v1"})
         )
 
         expected = RiskType.objects.all()
         serialized = RiskTypeSerializer(expected, many=True)
         self.assertEqual(response.data, serialized.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_get_risk_type(self):
+        risk_types = RiskType.objects.all()
+        expected_risk_type = risk_types[0]
+        expected_risk_type_serialized = RiskTypeSerializer(expected_risk_type)
+        response = self.client.get(
+            reverse("get-riskType", kwargs={"version": "v1", "pk": expected_risk_type.pk})
+        )
+        
+        self.assertEqual(response.data, expected_risk_type_serialized.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
