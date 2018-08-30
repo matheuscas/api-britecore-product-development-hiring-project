@@ -40,7 +40,6 @@ class BaseViewTests(APITestCase):
 
         for iterr in list(range(0, randint(2, 29))):
             EnumFieldValue.objects.create(
-                key=iterr,
                 value=f'enum_value_{enum_field.id}_enum_field_{iterr}',
                 enum_field=enum_field
             )
