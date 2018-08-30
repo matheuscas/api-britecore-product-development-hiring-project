@@ -5,10 +5,16 @@ from django.db import models
 class RiskType(models.Model):
     description = models.CharField(max_length=200)
 
+    def __str__(self):
+        return f'{self.description}'
+
 class Field(models.Model):
     name = models.CharField(max_length=200)
     class Meta:
         abstract = True
+
+    def __str__(self):
+        return f'{self.name}'
 
 class TextField(Field):
     risk_type = models.ForeignKey(RiskType, related_name="text_fields", on_delete=models.CASCADE)
