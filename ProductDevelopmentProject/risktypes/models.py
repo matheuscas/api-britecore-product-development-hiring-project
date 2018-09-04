@@ -18,22 +18,18 @@ class Field(models.Model):
 
 class TextField(Field):
     risk_type = models.ForeignKey(RiskType, related_name="text_fields", on_delete=models.CASCADE)
-    value = models.CharField(max_length=200, blank=True)
 
 class NumberField(Field):
     risk_type = models.ForeignKey(RiskType, related_name="number_fields", on_delete=models.CASCADE)
-    value = models.FloatField(blank=True, null=True)
 
 class DateField(Field):
     risk_type = models.ForeignKey(RiskType, related_name="date_fields", on_delete=models.CASCADE)
-    value = models.DateField(blank=True, null=True)
 
 class EnumField(Field):
     risk_type = models.ForeignKey(RiskType, related_name="enum_fields", on_delete=models.CASCADE)
 
 class EnumFieldValue(models.Model):
     enum_field = models.ForeignKey(EnumField, related_name="enum_field_values", on_delete=models.CASCADE)
-    value = models.CharField(max_length=100)
 
     def __str__(self):
         return f'{self.value}'
