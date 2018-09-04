@@ -11,6 +11,7 @@ class RiskTypeView(generics.ListAPIView):
     queryset = RiskType.objects.all()
     serializer_class = RiskTypeSerializer
 
+
 class RiskTypeDetailView(generics.RetrieveAPIView):
     queryset = RiskType.objects.all()
     serializer_class = RiskTypeSerializer

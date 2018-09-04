@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import RiskType, TextField, NumberField, DateField, EnumField, EnumFieldValue
+from .models import RiskType, TextField, NumberField, DateField, EnumField,
+from .models import EnumFieldValue
 
 # Register your models here.
 

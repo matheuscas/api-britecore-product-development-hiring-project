@@ -3,11 +3,13 @@ from django.urls import reverse
 from rest_framework.test import APITestCase, APIClient
 from rest_framework.views import status
 
-from .models import RiskType, TextField, NumberField, DateField, EnumField, EnumFieldValue
+from .models import RiskType, TextField, NumberField, DateField, EnumField
+from .models import EnumFieldValue
 from .serializers import RiskTypeSerializer
 from random import randint
 
 # Create your tests here.
+
 
 class BaseViewTests(APITestCase):
     client = APIClient()
@@ -20,19 +22,16 @@ class BaseViewTests(APITestCase):
                 name=f'risk_type_{risk_type.id}_text_field_{iterr}',
                 risk_type=risk_type
             )
-        
         for iterr in list(range(0, randint(1, 9))):
             NumberField.objects.create(
                 name=f'risk_type_{risk_type.id}_number_field_{iterr}',
                 risk_type=risk_type
             )
-        
         for iterr in list(range(0, randint(1, 9))):
             DateField.objects.create(
                 name=f'risk_type_{risk_type.id}_date_field_{iterr}',
                 risk_type=risk_type
             )
-        
         enum_field = EnumField.objects.create(
             name=f'risk_type_{risk_type.id}_enum_field_{iterr}',
             risk_type=risk_type
@@ -48,6 +47,7 @@ class BaseViewTests(APITestCase):
         self.create_risk_types("Gold Tournament Prize")
         self.create_risk_types("Automobile Policy")
         self.create_risk_types("Cyber Liability Coverage")
+
 
 class GetAllRiskTypes(BaseViewTests):
     def test_get_all_risk_types(self):
@@ -70,8 +70,10 @@ class GetAllRiskTypes(BaseViewTests):
         expected_risk_type = risk_types[0]
         expected_risk_type_serialized = RiskTypeSerializer(expected_risk_type)
         response = self.client.get(
-            reverse("get-riskType", kwargs={"version": "v1", "pk": expected_risk_type.pk})
+            reverse("get-riskType", kwargs={
+                "version": "v1",
+                "pk": expected_risk_type.pk
+            })
         )
-        
         self.assertEqual(response.data, expected_risk_type_serialized.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)

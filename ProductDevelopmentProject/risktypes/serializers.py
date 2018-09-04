@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import RiskType, EnumField
 
+
 class EnumFieldSerializer(serializers.ModelSerializer):
 
     enum_field_values = serializers.SlugRelatedField(
@@ -11,7 +12,8 @@ class EnumFieldSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = EnumField
-        fields = ('name','enum_field_values')
+        fields = ('name', 'enum_field_values')
+
 
 class RiskTypeSerializer(serializers.ModelSerializer):
     text_fields = serializers.SlugRelatedField(
@@ -35,5 +37,5 @@ class RiskTypeSerializer(serializers.ModelSerializer):
     enum_fields = EnumFieldSerializer(many=True)
 
     class Meta:
-        model = RiskType    
+        model = RiskType
         fields = '__all__'
