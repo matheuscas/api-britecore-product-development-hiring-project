@@ -8,10 +8,16 @@ from .serializers import RiskTypeSerializer
 
 
 class RiskTypeView(generics.ListAPIView):
+    """
+    Return a list of all existing risk types
+    """
     queryset = RiskType.objects.all()
     serializer_class = RiskTypeSerializer
 
 
 class RiskTypeDetailView(generics.RetrieveAPIView):
+    """
+    Return a risk type based on the provided id
+    """
     queryset = RiskType.objects.all()
     serializer_class = RiskTypeSerializer
