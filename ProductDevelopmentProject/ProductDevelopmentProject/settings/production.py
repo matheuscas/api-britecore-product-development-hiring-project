@@ -5,7 +5,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = False
 
 # It ust be defined after deploy is done
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["6aer4573jb.execute-api.us-west-2.amazonaws.com"]
 
 DATABASES = {
     'default': {
