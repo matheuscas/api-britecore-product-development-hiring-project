@@ -19,8 +19,16 @@ DATABASES = {
 }
 
 INSTALLED_APPS += [
-    "storages"
+    "storages",
+    "corsheaders",
 ]
+
+MIDDLEWARE.insert(0, 'corsheaders.middleware.CorsMiddleware')
+
+AWS_HEADERS = {
+    'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+    'Cache-Control': 'max-age=94608000',
+}
 
 AWS_STORAGE_BUCKET_NAME = 'zappa-britecore-s3-static'
 
@@ -30,12 +38,5 @@ STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
-SECURE_CONTENT_TYPE_NOSNIFF = True
-
-SECURE_BROWSER_XSS_FILTER = True
-
-# SESSION_COOKIE_SECURE = True
-
-# CSRF_COOKIE_SECURE = True
-
-X_FRAME_OPTIONS = 'DENY'
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = False
